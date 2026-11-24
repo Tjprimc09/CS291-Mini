@@ -1,3 +1,5 @@
 networkx==3.7
 matplotlib==3.11.2
 airportsdata
+gunicorn==27.0.1
+flask==3.1.3
