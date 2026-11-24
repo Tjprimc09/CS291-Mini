@@ -2,3 +2,5 @@
 __pycache__/
 CLEANED_DB1C.csv
 DB1C.PUBLIC.202607.REL01.15OCT2026.csv
+.env
+.vscode/

@@ -3,7 +3,6 @@ from selectedAirports import selectedAirports #just a set of the airports this p
 import csv # reads CSV files
 import json # used to deserialize from CSV back into lists and dictionaries
 from pathlib import Path # finds the CSV files in the same folder as this script
-import matplotlib.pyplot as plt # library simply for drawing and plotting graphs (visualization)
 import networkx as nx #library for creating graph objects (in memory) and analyzing them
 
 folder = Path(__file__).resolve().parent
