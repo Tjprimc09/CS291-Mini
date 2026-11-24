@@ -13,3 +13,10 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
         with:
           persist-credentials: false
+      - name: Update application files
+        run: |
+          rsync -av --exclude='.git/' --exclude='venv/' ./ /home/ec2-user/CS291-Mini/
+      - name: Install Python dependencies
+        run: |
+          cd /home/ec2-user/CS291-Mini
+          venv/bin/python -m pip install -r requirements.txt
