@@ -11,21 +11,20 @@ def menu():
     print("GRAPH THEORY MINI PROJECT - MENU\n")
     print("1. List all nodes (international airports) in the graph")
     print("2. List all international airports (nodes) by state")
-    print("3. List all edges for a specific node")
-    print("4. List all adjacent nodes for a specific node")
-    print("5. Find the shortest path between two nodes")
-    print("6. Visualize the graph")
-    print("7. Exit")
+    print("3. List all adjacent nodes for a specific node")
+    print("4. Find the shortest path between two nodes")
+    print("5. Visualize the graph")
+    print("6. Exit")
 
     choice = ""
 
-    while choice not in ["1", "2", "3", "4", "5", "6", "7"]:
+    while choice not in ["1", "2", "3", "4", "5", "6"]:
         try:
-            choice = input("Please select an option (1-7): ")
-            if choice not in ["1", "2", "3", "4", "5", "6", "7"]:
-                print("Invalid choice. Please enter a number between 1 and 7.")
+            choice = input("Please select an option (1-6): ")
+            if choice not in ["1", "2", "3", "4", "5", "6"]:
+                print("Invalid choice. Please enter a number between 1 and 6.")
         except Exception as e:
-            print(f"Invalid input. Please enter a number between 1 and 7.")
+            print(f"Invalid input. Please enter a number between 1 and 6.")
     
     return choice
 
@@ -49,26 +48,19 @@ def secondary_menu(graph):
 
 def run(graph):
     choice = ""
-    while choice != "7":
+    while choice != "6":
         choice = menu()
         if choice == "1":
             list_all_nodes(graph)
         elif choice == "2":
             list_and_draw_nodes_by_state(graph)
         elif choice == "3":
-            node = secondary_menu(graph)
-            list_and_draw_edges_for_node(graph, node)
-        elif choice == "4":
-            node = secondary_menu(graph)
             list_and_draw_adjacent_nodes(graph, node)
+        elif choice == "4":
+            draw_shortest_path(graph)
         elif choice == "5":
-            start_node = secondary_menu(graph)
-            end_node = secondary_menu(graph)
-            draw_shortest_path(graph, start_node, end_node)
-        elif choice == "6":
             visualize_graph(graph)
-
-        elif choice == "7":
+        elif choice == "6":
             print("Exiting the program.")
             return
         
@@ -87,7 +79,9 @@ def visualize_graph(graph):
     return
 
 # Draw the shortest path
-def draw_shortest_path(graph, start_node, end_node):
+def draw_shortest_path(graph):
+    start_node = secondary_menu(graph)
+    end_node = secondary_menu(graph)
     shortest_path = find_shortest_path(graph, start_node, end_node)
     
     if not shortest_path:
@@ -188,21 +182,6 @@ def list_all_nodes(graph):
 
     return
 
-# Get all edges for a specific node in the graph
-def get_edges_for_node(graph, node):
-    
-    if node in graph.nodes():
-        edges = list(graph.edges(node))
-        if edges:
-            print(f"Edges for node {node}:")
-            for edge in edges:
-                print(edge)
-        else:
-            print(f"No edges found for node {node}.")
-    else:
-        print(f"Node {node} does not exist in the graph.")
-
-    return
 
 # List nodes by state
 def list_and_draw_nodes_by_state(graph):
@@ -225,7 +204,8 @@ def list_and_draw_nodes_by_state(graph):
 
 
 # List all adjacent nodes for a specific node in the graph
-def list_and_draw_adjacent_nodes(graph, node):
+def list_and_draw_adjacent_nodes(graph):
+    node = secondary_menu(graph)
     if node in graph.nodes():
         adjacent_nodes = list(graph.adj[node])
         if adjacent_nodes:
@@ -252,28 +232,6 @@ def list_and_draw_adjacent_nodes(graph, node):
 
     return
 
-# List and draw edges for a specific node in the graph
-def list_and_draw_edges_for_node(graph, node):
-    if node in graph.nodes():
-        edges = list(graph.edges(node))
-        if edges:
-            print(f"Edges for node {node}:")
-            for edge in edges:
-                print(edge)
-
-            pos = {node: (graph.nodes[node]['viz']["position"]["x"],
-                          graph.nodes[node]['viz']["position"]["y"])
-                   for node in set([n for edge in edges for n in edge])}
-
-            nx.draw(graph.subgraph(pos.keys()), pos, edgelist=edges, with_labels=True, node_color='darkblue', node_size=2000, font_color='white', font_size=10)
-            plt.show()
-        
-        else:
-            print(f"No edges found for node {node}.")
-    else:
-        print(f"Node {node} does not exist in the graph.")
-    
-    return
 
 # List all selected airports by state
 def list_and_draw_selected_airports_by_state(graph, state):
