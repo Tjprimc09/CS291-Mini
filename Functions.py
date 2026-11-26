@@ -175,7 +175,7 @@ def calculate_unique_neighbors(graph):
     unique_neighbors = {node: set(graph.neighbors(node)) for node in graph.nodes()}
     return unique_neighbors
 
-    #Implement airport hub identification and ranking based on in and out degree
+#airport hub identification and ranking based on in and out degree
 def identify_airport_hubs(graph):
     in_degrees, out_degrees = calculate_in_out_degree(graph)
     hubs = {node: in_degrees[node] + out_degrees[node] for node in graph.nodes()}
