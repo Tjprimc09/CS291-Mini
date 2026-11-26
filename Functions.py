@@ -164,7 +164,24 @@ def find_shortest_path(graph, start_node, end_node):
     
     return dict(reversed(list(shortestPath.items()))) # Returns the path with distances from start_node to all reachable nodese nodes
 
-    
+#in-degree and out-degree calculation for each node
+def calculate_in_out_degree(graph):
+    in_degrees = dict(graph.in_degree())
+    out_degrees = dict(graph.out_degree())
+    return in_degrees, out_degrees
+
+#unique neighbors calculation for each node
+def calculate_unique_neighbors(graph):
+    unique_neighbors = {node: set(graph.neighbors(node)) for node in graph.nodes()}
+    return unique_neighbors
+
+    #Implement airport hub identification and ranking based on in and out degree
+def identify_airport_hubs(graph):
+    in_degrees, out_degrees = calculate_in_out_degree(graph)
+    hubs = {node: in_degrees[node] + out_degrees[node] for node in graph.nodes()}
+    ranked_hubs = sorted(hubs.items(), key=lambda x: x[1], reverse=True)
+    return ranked_hubs
+  
 # Print all nodes (international airports) in the graph
 def list_all_nodes(graph):
     print("\nAVAILABLE AIRPORTS")
@@ -294,3 +311,8 @@ def get_node(graph):
         except Exception as e:
             print(f"Invalid input. Please enter a valid node.")
     return node
+
+
+
+
+# 
