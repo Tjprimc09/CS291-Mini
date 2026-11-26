@@ -127,3 +127,4 @@ def list_and_draw_nodes_by_state(graph):
     return jsonify(state=state, **graph_data(graph, nodes))
 
 
+# Implement web functions for in/out degree
