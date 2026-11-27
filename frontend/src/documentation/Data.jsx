@@ -9,12 +9,7 @@ export default function Data() {
             <p>
                 Given the assignment requirements, we wanted to find a dataset
                 that reflected the actual structure of America's air transportation
-                network. Freight vs passenger air travel is particularly interesting from a
-                graph theory perspective because airports vary considerably in
-                their connectivity. For passengers, traveling between two airports may require
-                passing through one or more intermediate airports, while major
-                transportation hubs provide connections to a significantly greater
-                number of destinations.
+                network.
             </p>
         
             <p>
