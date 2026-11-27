@@ -203,34 +203,6 @@ export default function Code() {
                 sequence, along with the cumulative distance at each airport.
             </p>
         
-            <h5>6. Computational complexity</h5>
-        
-            <p>
-                Our implementation searches the unvisited set to identify
-                the next vertex with the shortest known distance. This
-                produces a worst-case time complexity of:
-            </p>
-        
-            <div className="math-expression">
-                O(|V|² + |E|)
-            </div>
-        
-            <p>
-                The algorithm also requires auxiliary space proportional
-                to the number of vertices:
-            </p>
-        
-            <div className="math-expression">
-                O(|V|)
-            </div>
-        
-            <p>
-                Given the relatively small size of our graph, this
-                implementation provides a straightforward and practical
-                solution while clearly demonstrating the fundamental
-                operations of Dijkstra's algorithm.
-            </p>
-        
             <h4>Application Architecture</h4>
         
             <p>
