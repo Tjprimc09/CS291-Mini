@@ -9,14 +9,31 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
         with:
           persist-credentials: false
+
       - name: Update application files
         run: |
-          rsync -av --exclude='.git/' --exclude='venv/' ./ /home/ec2-user/CS291-Mini/
+          rsync -av --exclude='.git/' --exclude='venv/' --exclude='frontend/node_modules/' --exclude='frontend/dist/' ./ /home/ec2-user/CS291-Mini/
+
       - name: Install Python dependencies
         run: |
           cd /home/ec2-user/CS291-Mini
           venv/bin/python -m pip install -r requirements.txt
+
+      - name: Build frontend
+        run: |
+          cd /home/ec2-user/CS291-Mini/frontend
+          npm ci
+          npm run build
+
+      - name: Publish frontend
+        run: |
+          sudo -n cp -r /home/ec2-user/CS291-Mini/frontend/dist/. /var/www/skymesh/
+
+      - name: Restart Gunicorn
+        run: |
+          sudo -n systemctl restart skymesh
