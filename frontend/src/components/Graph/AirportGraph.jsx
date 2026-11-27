@@ -6,6 +6,7 @@ import graphStyles from './graphStyles'
 import graphEvents from './graphEvents'
 import graphHighlighting from './graphHighlighting'
 import GraphCanvas from './GraphCanvas'
+import ConnectivityResults from './ConnectivityResults'
 
 
 export default function AirportGraph() {
@@ -23,6 +24,9 @@ export default function AirportGraph() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(true)
     const [busy, setBusy] = useState(false)
+    const [metric, setMetric] = useState('total_degree')
+    const [order, setOrder] = useState('descending')
+    const [numAirports, setNumAirports] = useState(5)
 
     const selection = useRef({ start: '', end: '' })
     selection.current = { start, end }
@@ -128,6 +132,18 @@ export default function AirportGraph() {
         )
     }, [network, result, hovered, clickedNodes, start, end])
 
+    // Scroll to the graph when an operation returns results.
+    useEffect(() => {
+        if (result) {
+            graphContainer.current
+                ?.closest('.graph-area')
+                ?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                })
+        }
+    }, [result])
+
     const airports = [...(network?.nodes || [])].sort(
         (a, b) => a.id.localeCompare(b.id)
     )
@@ -202,6 +218,22 @@ export default function AirportGraph() {
         }
     }
 
+    function rankConnectivity() {
+        clearResult()
+        setState('')
+        setStart('')
+        setEnd('')
+
+        applyOperation(`/rank-connectivity?${new URLSearchParams({
+            metric,
+            order,
+            num_airports: numAirports
+                    }
+                )
+            }
+        `)
+    }
+
     return (
         <section id="graph" className="graph-section">
 
@@ -211,11 +243,11 @@ export default function AirportGraph() {
                         <span /> INTERACTIVE NETWORK
                     </p>
 
-                    <h2>Explore the graph</h2>
+                    <h2>Interact with the graph</h2>
 
                     <p>
-                        Hover to explore connections.
-                        Select two airports to calculate a path.
+                        Inspect airports and their direct connections, filter airports
+                        by state, find shortest paths, and rank airport connectivity.
                     </p>
                 </div>
 
@@ -227,6 +259,13 @@ export default function AirportGraph() {
             </div>
 
             <GraphControls
+                metric={metric}
+                setMetric={setMetric}
+                order={order}
+                setOrder={setOrder}
+                numAirports={numAirports}
+                setNumAirports={setNumAirports}
+                rankConnectivity={rankConnectivity}
                 start={start}
                 end={end}
                 state={state}
@@ -261,6 +300,7 @@ export default function AirportGraph() {
                 inspectedNode={inspectedNode}
                 neighbors={neighbors}
             />
+            <ConnectivityResults result={result} />
         </section>
     )
 }

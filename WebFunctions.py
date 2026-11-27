@@ -37,7 +37,79 @@ def graph_data(graph, nodes=None, edges=None):
             "edges": [{"source": a, "target": b} for a, b in edges],
             "directed": graph.is_directed()}
 
+#web implementation for ranking connectivity of airports
+def rank_connectivity(graph):
+    # Retrieve the user's selections
+    metric = request.args.get("metric", "total_degree")
+    order = request.args.get("order", "descending")
+    num_airports = request.args.get("num_airports", 5, type=int)
 
+    # Validate the user's selections
+    if order not in ("ascending", "descending"):
+        abort(400, description="Select a valid ranking order.")
+
+    if num_airports < 1:
+        abort(400, description="Select a valid number of airports.")
+
+    # Rank all airports
+    rankings = identify_airport_hubs(graph, metric, order)
+
+    # Determine the minimum and maximum degree across the entire graph
+    min_degree = min(degree for node, degree in rankings)
+    max_degree = max(degree for node, degree in rankings)
+
+    # Retain the requested number of airports
+    rankings = rankings[:num_airports]
+
+    # Extract airport identifiers
+    nodes = [node for node, degree in rankings]
+
+    # Retrieve in-degree and out-degree measurements
+    in_degrees, out_degrees = calculate_in_out_degree(graph)
+
+    # Return the rankings and graph data
+    return jsonify(
+        metric=metric,
+        order=order,
+        min_degree=min_degree,
+        max_degree=max_degree,
+        rankings=[
+            {
+                "id": node,
+                "degree": degree,
+                "in_degree": in_degrees[node],
+                "out_degree": out_degrees[node],
+                "total_degree": in_degrees[node] + out_degrees[node]
+            }
+            for node, degree in rankings
+        ],
+        **graph_data(graph, nodes)
+    )
+
+def calculate_in_out_degree(graph):
+    in_degrees = dict(graph.in_degree())
+    out_degrees = dict(graph.out_degree())
+    return in_degrees, out_degrees
+
+#airport hub identification and ranking based on in and out degree
+def identify_airport_hubs(graph, metric, order):
+    in_degrees, out_degrees = calculate_in_out_degree(graph)
+
+    if metric == "in_degree":
+        hubs = in_degrees
+
+    elif metric == "out_degree":
+        hubs = out_degrees
+
+    elif metric == "total_degree":
+        hubs = {node: in_degrees[node] + out_degrees[node] for node in graph.nodes()}
+
+    else:
+        abort(400, description="Select a valid connectivity metric.")
+
+    return sorted(hubs.items(), key=lambda x: x[1], reverse=(order == "descending"))
+
+#draw the shortest path between two nodes in the graph
 def draw_shortest_path(graph):
     start_node = get_node(graph, "start")
     end_node = get_node(graph, "end")
@@ -127,4 +199,3 @@ def list_and_draw_nodes_by_state(graph):
     return jsonify(state=state, **graph_data(graph, nodes))
 
 
-# Implement web functions for in/out degree

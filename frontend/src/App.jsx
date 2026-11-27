@@ -1,7 +1,6 @@
 import './App.css'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Features from './components/Features'
 import AirportGraph from './components/Graph/AirportGraph'
 import Footer from './components/Footer'
 import ProjectDocumentation from './documentation/ProjectDocumentation'
@@ -12,7 +11,6 @@ function App() {
         <Header />
         <main>
             <Hero />
-            <Features />
             <AirportGraph />
             <ProjectDocumentation />
         </main>

@@ -210,128 +210,113 @@ export default function Findings() {
         have relatively few connections.
     </p>
 
-    <p>We measured connectivity in three ways:</p>
+   <p>We measured connectivity in two ways:</p>
 
-    <ul>
-        <li>
-            <strong>In-degree:</strong> Number of incoming edges.
-        </li>
-        <li>
-            <strong>Out-degree:</strong> Number of outgoing edges.
-        </li>
-        <li>
-            <strong>Unique neighbors:</strong> Number of distinct
-            adjacent vertices.
-        </li>
-    </ul>
+        <ul>
+            <li>
+                <strong>In-degree:</strong> Number of incoming edges.
+            </li>
+            <li>
+                <strong>Out-degree:</strong> Number of outgoing edges.
+            </li>
+        </ul>
 
-    <div className="infrastructure-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Airport</th>
-                    <th>In-degree</th>
-                    <th>Out-degree</th>
-                    <th>Unique neighbors</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>ORD</td>
-                    <td>111</td>
-                    <td>113</td>
-                    <td>116</td>
-                </tr>
-                <tr>
-                    <td>DEN</td>
-                    <td>111</td>
-                    <td>109</td>
-                    <td>113</td>
-                </tr>
-                <tr>
-                    <td>DFW</td>
-                    <td>107</td>
-                    <td>109</td>
-                    <td>109</td>
-                </tr>
-                <tr>
-                    <td>MCI</td>
-                    <td>76</td>
-                    <td>73</td>
-                    <td>84</td>
-                </tr>
-                <tr>
-                    <td>ITO</td>
-                    <td>5</td>
-                    <td>3</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>KTN</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>ART</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>INL</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>SBD</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div className="infrastructure-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>In-degree</th>
+                        <th>Out-degree</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ORD</td>
+                        <td>111</td>
+                        <td>113</td>
+                    </tr>
+                    <tr>
+                        <td>DEN</td>
+                        <td>111</td>
+                        <td>109</td>
+                    </tr>
+                    <tr>
+                        <td>DFW</td>
+                        <td>107</td>
+                        <td>109</td>
+                    </tr>
+                    <tr>
+                        <td>MCI</td>
+                        <td>76</td>
+                        <td>73</td>
+                    </tr>
+                    <tr>
+                        <td>ITO</td>
+                        <td>5</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>KTN</td>
+                        <td>4</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>ART</td>
+                        <td>3</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>INL</td>
+                        <td>2</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>SBD</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p>
-        ORD is the most connected airport in our graph, with
-        <strong> 116 adjacent airports</strong>. SBD is the
-        least connected, with only one adjacent airport.
+            ORD is the most connected airport in our graph, with
+            111 incoming and 113 outgoing edges. SBD is the least
+            connected airport, with one incoming and one outgoing edge.
         </p>
 
         <h4>One-Way and Bidirectional Connections</h4>
 
         <p>
-        We found that many airport connections exist in both
-        directions, while others exist in only one direction.
+            We found that many airport connections exist in both
+            directions, while others exist in only one direction.
         </p>
 
-    <div className="infrastructure-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Connection type</th>
-                    <th>Count</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Bidirectional airport pairs</td>
-                    <td>2,993</td>
-                </tr>
-                <tr>
-                    <td>One-way airport pairs</td>
-                    <td>893</td>
-                </tr>
-                <tr>
-                    <td>Total directed edges</td>
-                    <td>6,879</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+        <div className="infrastructure-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Connection type</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bidirectional airport pairs</td>
+                        <td>2,993</td>
+                    </tr>
+                    <tr>
+                        <td>One-way airport pairs</td>
+                        <td>893</td>
+                    </tr>
+                    <tr>
+                        <td>Total directed edges</td>
+                        <td>6,879</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <p>
         Approximately 13% of the edges in SkyMesh have no
         corresponding reverse edge. If we represented the airport
@@ -359,12 +344,12 @@ export default function Findings() {
         connections while still having access to the entire network.
         </p>
 
-        <h4>Euler Paths and Circuits</h4>
+        <h4>Euler Circuits</h4>
 
         <p>
-        In Assignment 6, we learned that a connected undirected
-        graph contains an Euler circuit if every vertex has
-        an even degree.
+        In Assignment 6, we identified that a connected undirected
+        graph contains an Euler circuit if <strong>every vertex has
+        an even degree.</strong>
         </p>
 
         <p>
@@ -381,13 +366,6 @@ export default function Findings() {
         <p>
         Because MCI has an odd degree, SkyMesh cannot contain
         an Euler circuit.
-        </p>
-
-        <p>
-        SkyMesh also contains no Euler path that traverses every
-        directed edge exactly once. MCI has three more incoming
-        edges than outgoing edges, making such a traversal
-        impossible.
         </p>
 
         <h4>Geographic Modeling</h4>

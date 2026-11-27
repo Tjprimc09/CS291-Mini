@@ -18,6 +18,7 @@
     --radius: 8px;
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
+    overflow-anchor: none;
 }
 
 * {
@@ -79,6 +80,32 @@ body {
     scroll-margin-top: 28px;
 }
 
+/* Custom scrollbars */
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;  
+}
+
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border: none;   
+}
+
+::-webkit-scrollbar-thumb {
+    background: #071b4040;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--red);
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
 
 /* Site header */
 
@@ -126,11 +153,6 @@ body {
     color: var(--red);
 }
 
-.brand-symbol {
-    margin-right: 10px;
-    color: var(--blue);
-    font-size: 27px;
-}
 
 .site-header nav {
     display: flex;
@@ -254,42 +276,6 @@ body {
     box-shadow: var(--shadow);
 }
 
-
-/* Feature cards */
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.feature {
-    position: relative;
-    background: #fff;
-    border: none;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 27px 24px 27px 38px;
-}
-
-.feature::before {
-    content: '';
-    position: absolute;
-    left: 15px;
-    top: 27px;
-    bottom: 27px;
-    width: 3px;
-    border-radius: 3px;
-    background: var(--blue);
-    box-shadow: 0 0 6px #0599d830;
-}
-
-.feature h3 {
-    font-size: 17px;
-    margin-bottom: 9px;
-}
-
-.feature p,
 .section-heading p:not(.eyebrow),
 .project-section p:not(.eyebrow) {
     font-size: 15px;
@@ -336,9 +322,8 @@ body {
 
 .graph-controls {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
-    flex-wrap: wrap;
     gap: 16px;
     width: 100%;
     padding: 20px 24px;
@@ -388,7 +373,8 @@ body {
 /* Shortest path controls */
 
 .route-controls {
-    flex: 2 1 0;
+    flex: none;
+    width: 100%;
     min-width: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -424,11 +410,110 @@ body {
 /* State filter controls */
 
 .filter-controls {
-    flex: 1 1 0;
+    flex: none;
+    width: 100%;
     min-width: 0;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 10px 16px;
+}
+
+/* Connectivity controls */
+
+.connectivity-controls {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px 16px;
+}
+
+.connectivity-controls label[for="ranking-order"],
+.connectivity-controls label[for="num-airports"] {
+    margin-top: 6px;
+}
+
+.graph-controls .connectivity-controls .button {
+    width: 100%;
+}
+
+
+/* Airport count controls */
+
+.airport-count-controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 76px;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+
+/* Numeric input */
+
+.airport-count-controls input[type="number"] {
+    width: 100%;
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    text-align: center;
+    color: var(--navy);
+    background: #f8fafc;
+    border: none;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+}
+
+
+/* Airport count slider */
+
+.airport-count-controls input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    margin: 0;
+    background: #e2e8f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+/* Chrome, Edge and Safari slider handle */
+
+.airport-count-controls input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--navy);
+    border: none;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+
+/* Firefox slider handle */
+
+.airport-count-controls input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--navy);
+    border: none;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+
+/* Reset graph button */
+
+.graph-controls > .button.secondary {
+    width: 100%;
 }
 
 
@@ -570,7 +655,7 @@ body {
 }
 
 .node-info.hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .node-info span,
@@ -579,6 +664,98 @@ body {
     font-size: 12px;
 }
 
+/* Connectivity legend */
+
+.connectivity-legend {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.connectivity-gradient {
+    width: 100%;
+    height: 8px;
+    border-radius: 6px;
+}
+
+.connectivity-legend-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+
+/* Connectivity ranking results */
+
+.connectivity-results {
+    display: grid;
+    gap: 12px;
+    width: 100%;
+    padding: 20px 24px;
+    background: #fff;
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.connectivity-results h3 {
+    font-size: 16px;
+    color: var(--navy);
+}
+
+.connectivity-results p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+
+/* Connectivity ranking table */
+
+.connectivity-table {
+    max-height: 360px;
+    overflow: auto;
+}
+
+.connectivity-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.connectivity-table th {
+    position: sticky;
+    top: 0;
+    background: #f8fafc;
+    color: var(--navy);
+    font-weight: 650;
+    padding: 12px 16px;
+}
+
+.connectivity-table td {
+    padding: 12px 16px;
+    color: var(--muted);
+}
+
+.connectivity-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.connectivity-table td:nth-child(2) {
+    color: var(--navy);
+    font-weight: 600;
+}
+
+.connectivity-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
 /* Project section */
 
@@ -1636,9 +1813,6 @@ body {
         height: 450px;
     }
 
-    .features {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 540px) {
@@ -1668,6 +1842,7 @@ body {
 
     .graph-section {
         padding-top: 65px;
+        overflow-anchor: none;
     }
 
     .site-footer {

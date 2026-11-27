@@ -9,12 +9,11 @@ export default function Hero() {
             <h1>Sky<span>Mesh</span></h1>
 
             <h2>
-              Explore America’s airport network through graph theory.
+              Modeling airport connectivity with graph theory
             </h2>
 
             <p className="hero-description">
-              Visualize airport connections, discover efficient paths,
-              and explore the structure of a connected network.
+              An interactive graph for finding efficient routes, exploring airport connections, ranking connectivity, and filtering airports by state.
             </p>
 
             <div className="hero-actions">

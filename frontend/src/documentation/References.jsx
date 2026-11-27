@@ -2,7 +2,7 @@ import CollapsibleProjectSection from '../components/CollapsibleProjectSection';
 
 export default function References() {
     return (
-<CollapsibleProjectSection id="references" number="10" title="References and Resources">
+<CollapsibleProjectSection id="references" number="09" title="References and Resources">
 
     <h4>Data References</h4>
 
@@ -61,7 +61,7 @@ export default function References() {
                 </tr>
 
                 <tr>
-                    <td>Programming languages</td>
+                    <td>Languages</td>
                     <td>Python, JavaScript, CSS</td>
                 </tr>
 
@@ -100,7 +100,7 @@ export default function References() {
 
                 <tr>
                     <td>Artificial intelligence</td>
-                    <td>ChatGPT, GitHub Copilot</td>
+                    <td>ChatGPT (GPT-6, GPT-6 Luna, GPT-6.2), GitHub Copilot</td>
                 </tr>
             </tbody>
         </table>

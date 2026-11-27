@@ -8,10 +8,10 @@ export default function Data() {
         
             <p>
                 Given the assignment requirements, we wanted to find a dataset
-                that reflected the structure of America's actual air transportation
-                network. Commercial aviation is particularly interesting from a
+                that reflected the actual structure of America's air transportation
+                network. Freight vs passenger air travel is particularly interesting from a
                 graph theory perspective because airports vary considerably in
-                their connectivity. Traveling between two airports may require
+                their connectivity. For passengers, traveling between two airports may require
                 passing through one or more intermediate airports, while major
                 transportation hubs provide connections to a significantly greater
                 number of destinations.
@@ -41,7 +41,7 @@ export default function Data() {
             <h4>Cleaning and Processing the Data</h4>
         
             <p>
-                The original dataset contained considerably more information
+                The original dataset contained more information
                 than was necessary for our application. To prepare the data
                 for graph construction, we developed a Python script to extract,
                 organize and consolidate the relevant information.

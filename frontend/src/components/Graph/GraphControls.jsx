@@ -1,3 +1,5 @@
+import ConnectivityControls from './ConnectivityControls'
+
 export default function GraphControls({
     start,
     end,
@@ -14,11 +16,35 @@ export default function GraphControls({
     findPath,
     filterState,
     resetGraph,
-    clearResult
+    clearResult,
+    metric,
+    setMetric,
+    order,
+    setOrder,
+    numAirports,
+    setNumAirports,
+    rankConnectivity
 }) {
     return (
             <div className="graph-controls">
+                <div className="filter-controls">
+                    <h3>Filter by state</h3>
 
+                    <label htmlFor="state-filter">State</label>
+
+                    <select
+                        id="state-filter"
+                        value={state}
+                        onChange={e => filterState(e.target.value)}
+                    >
+                        <option value="">All states</option>
+
+                        {states.map(name => (
+                        <option key={name}>{name}</option>
+                        ))}
+                    </select>
+                </div>
+                
                 <div className="route-controls">
                     <h3>Find a route</h3>
 
@@ -78,32 +104,27 @@ export default function GraphControls({
                     </button>
                 </div>
 
-                <div className="filter-controls">
-                    <h3>Filter by state</h3>
 
-                    <label htmlFor="state-filter">State</label>
+                <ConnectivityControls
+                    metric={metric}
+                    setMetric={setMetric}
+                    order={order}
+                    setOrder={setOrder}
+                    numAirports={numAirports}
+                    setNumAirports={setNumAirports}
+                    rankConnectivity={rankConnectivity}
+                    busy={busy}
+                    network={network}
+                />
 
-                    <select
-                        id="state-filter"
-                        value={state}
-                        onChange={e => filterState(e.target.value)}
-                    >
-                        <option value="">All states</option>
-
-                        {states.map(name => (
-                        <option key={name}>{name}</option>
-                        ))}
-                    </select>
-
-                    <button
+                <button
                         type="button"
                         className="button secondary"
                         disabled={!network}
                         onClick={resetGraph}
                     >
                         Reset graph
-                    </button>
-                </div>
+                </button>
 
                 <div className="results" aria-live="polite">
                     {busy && <p>Calculating…</p>}

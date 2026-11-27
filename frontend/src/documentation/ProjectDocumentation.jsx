@@ -4,7 +4,6 @@ import Graph from './Graph'
 import Code from './Code'
 import Infrastructure from './Infrastructure'
 import Findings from './Findings'
-import Members from './Members'
 import AI from './AI'
 import Future from './Future'
 import References from './References'
@@ -27,7 +26,6 @@ export default function ProjectDocumentation() {
         <Code />
         <Infrastructure />
         <Findings />
-        <Members />
         <AI /> 
         <Future />
         <References />

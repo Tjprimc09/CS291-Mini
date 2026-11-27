@@ -23,3 +23,7 @@ def shortest_path():
 @app.route("/airports-by-state")
 def airports_by_state():
     return WebFunctions.list_and_draw_nodes_by_state(graph)
+
+@app.route("/rank-connectivity")
+def rank_connectivity():
+    return WebFunctions.rank_connectivity(graph)

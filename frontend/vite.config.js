@@ -8,6 +8,7 @@ export default defineConfig({
       '/graph-data': 'http://127.0.0.1:5000',
       '/shortest-path': 'http://127.0.0.1:5000',
       '/airports-by-state': 'http://127.0.0.1:5000',
+      '/rank-connectivity': 'http://127.0.0.1:5000',
     },
   },
 })
