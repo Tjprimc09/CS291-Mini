@@ -14,8 +14,7 @@ export default function Graph() {
         
             <p>
                 Using the NetworkX Python library, we constructed a weighted
-                directed graph, mathematically represented as G = (V, E),
-                with an associated weight function w: E → ℝ₊.
+                directed graph, mathematically represented as G = (V, E)
             </p>
         
             <ul>
@@ -76,22 +75,8 @@ export default function Graph() {
             <h5>Accommodating one-way connections</h5>
         
             <p>
-                An important characteristic of this implementation is that
-                an edge from airport A to airport B does not automatically
-                establish an edge from airport B to airport A. A reverse
-                connection is created only if it appears independently in
-                the processed dataset.
-            </p>
-        
-            <p>
-                This allows SkyMesh to accommodate both one-way and
-                bidirectional connections. Consequently, the airports from
-                which a particular airport receives flights may differ from
-                the airports to which it sends flights.
-            </p>
-        
-            <p>
-                Of the 6,879 directed edges in the resulting graph,
+                An important characteristic of the graph is its ability to accommodate both one-way and
+                bidirectional connections.Of the 6,879 directed edges in the resulting graph,
                 <strong> 893 exist without a corresponding reverse edge</strong>,
                 accounting for approximately 13% of all connections.
             </p>
