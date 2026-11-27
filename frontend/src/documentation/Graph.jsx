@@ -76,7 +76,7 @@ export default function Graph() {
         
             <p>
                 An important characteristic of the graph is its ability to accommodate both one-way and
-                bidirectional connections.Of the 6,879 directed edges in the resulting graph,
+                bidirectional connections. Of the 6,879 directed edges in the resulting graph,
                 <strong> 893 exist without a corresponding reverse edge</strong>,
                 accounting for approximately 13% of all connections.
             </p>
