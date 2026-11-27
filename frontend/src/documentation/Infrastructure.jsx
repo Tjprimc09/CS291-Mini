@@ -21,7 +21,7 @@ export default function Infrastructure() {
             </p>
         
             <ul>
-                <li><strong>Instance type:</strong> t3.micro</li>
+                <li><strong>Instance type:</strong> m7i-flex.large</li>
                 <li><strong>Operating system:</strong> Amazon Linux 2023</li>
                 <li><strong>Region:</strong> US East (Ohio)</li>
                 <li><strong>Architecture:</strong> x86-64</li>

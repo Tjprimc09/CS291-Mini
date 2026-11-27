@@ -100,60 +100,15 @@ export default function Graph() {
         
             <p>
                 Longitude and latitude were used as the X and Y coordinates,
-                respectively. However, this introduced a challenge involving
-                the International Date Line, where longitude wraps between
-                positive and negative 180 degrees.
-            </p>
-        
-            <p>
-                To maintain geographic continuity along the horizontal axis,
-                we implemented the following adjustment:
-            </p>
-        
-            <pre><code>{`x = airport_geo_data[current]["X"]
-        y = airport_geo_data[current]["Y"]
-        
-        if x > 0:
-            x -= 360`}</code></pre>
-        
-            <p>
-                This adjustment can be expressed mathematically as:
-            </p>
-        
-            <div className="math-expression">
-                <span>x(λ) =</span>
-                <span className="math-brace">{'{'}</span>
-                <div className="math-cases">
-                    <span>λ − 360, &nbsp; λ &gt; 0</span>
-                    <span>λ, &nbsp; λ ≤ 0</span>
-                </div>
-            </div>
-        
-            <p>
-                Where λ represents the original longitude of an airport.
-            </p>
-        
-            <p>
-                For example, an airport located at a longitude of 175°
-                would be repositioned at −185°, preserving its relative
-                geographic position alongside airports in western Alaska.
-            </p>
-        
-            <p>
-                Once the coordinates have been adjusted, the vertex is
-                added to the graph with its positional attributes:
-            </p>
+                respectively. The vertex is then added to the graph with its positional attributes:
+
+            </p> 
         
             <pre><code>{`graph.add_node(current, viz={"position": {
             "x": x,
             "y": y,
             "z": 0.0
         }})`}</code></pre>
-        
-            <p>
-                The Z coordinate is set to zero because our visualization
-                exists on a two-dimensional plane.
-            </p>
         
             <h4>Visualization and Development</h4>
         
