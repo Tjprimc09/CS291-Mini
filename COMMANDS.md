@@ -6,7 +6,7 @@ From Windows PowerShell:
 
 ```powershell
 cd "$HOME\Downloads"
-ssh -i "SkyMesh-Key.pem" ec2-user@ec2-18-216-193-86.us-east-2.compute.amazonaws.com
+ssh -i "SkyMesh-Key.pem" ec2-user@18.221.182.216
 ```
 
 The SSH hostname must match the instance's current public DNS name.
